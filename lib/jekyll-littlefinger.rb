@@ -6,7 +6,11 @@ module Jekyll
   module AssetFilter
     def fingerprint(input)
       if should_fingerprint?
-        fingerprint_path(input.gsub(/\.css$/, ".scss"))
+        if input =~ /\.css$/
+          fingerprint_path(input.gsub(".css", ".scss")).gsub(".scss", ".css")
+        else
+          fingerprint_path(input)
+        end
       else
         add_baseurl(input)
       end
