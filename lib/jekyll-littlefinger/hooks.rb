@@ -54,10 +54,12 @@ module Littlefinger
 
             assets.each do |asset|
               unless File.directory?(asset)
-                if asset =~ /.css$/
-                  fingerprint = Fingerprint.new(asset.gsub("/_site/", "/").gsub(/.css$/, ".scss"))
+                if asset =~ /\.css$/
+                  fingerprint = Fingerprint.new(asset.gsub("/_site/", "//").gsub(".css", ".scss"))
+                  new_path = fingerprint.path.gsub('.scss', '.css').gsub("//", "/_site/")
                 else
                   fingerprint = Fingerprint.new(asset)
+                  new_path = fingerprint.path
                 end
                 new_path = fingerprint.path
                 puts "   renaming #{asset} to #{new_path}"
