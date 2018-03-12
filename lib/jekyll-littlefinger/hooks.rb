@@ -61,7 +61,6 @@ module Littlefinger
                   fingerprint = Fingerprint.new(asset)
                   new_path = fingerprint.path
                 end
-                new_path = fingerprint.path
                 puts "   renaming #{asset} to #{new_path}"
 
                 File.rename(asset, new_path)
